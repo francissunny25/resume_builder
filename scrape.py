@@ -28,16 +28,24 @@ print(job_dict['0']['id'])
 texts=[]
 parent='https://www.linkedin.com/jobs/view/'
 #3x=25
-for i in range(3):
+for i in range(25):
     elements=partition_html(url=parent+job_dict[str(i)]['id'])
     text=("\n\n".join([str(el) for el in elements]))
-    texts.append(text)
-for i,v in enumerate(texts):
-    print(i,v)
+    job_dict[str(i)]['jd']=text
 #workaround: use a directory to store text files 
 #read each file and store into json object
-# with open('./out.json','w') as f:
-#     f.write(job_dict)
-# f.close()
+
+json_data=[]
+for i in range(len(job_dict)):
+    json_data.append(job_dict[str(i)])
+with open('./jobs.json','w') as file:
+    json.dump(json_data,file,indent=4)
+    
+print(len(job_dict))
+
+  
+
+file.close()
+
 #convert html file to json file
 # Send a GET request to the URL
