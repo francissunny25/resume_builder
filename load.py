@@ -2,7 +2,10 @@ from bs4 import BeautifulSoup
 import json
 import requests
 from bs4.element import Doctype, NavigableString
-
+'''
+html_to_json:
+converts html to json
+'''
 def html_to_json(tag):
     if not tag:
         return None
@@ -23,7 +26,10 @@ def html_to_json(tag):
         "text": tag.string,
         "children": [html_to_json(child) for child in tag.children]
     }
-
+'''
+section 2:
+This code snippet grabs the html content from linkedin job title search
+'''
  #pg1 code
 pagenum=0
 job=input('what position u looking for:')
@@ -36,7 +42,7 @@ html_content = response.text
 soup = BeautifulSoup(html_content, 'html.parser')
 
 
-# # Convert the BeautifulSoup object to a JSON string
+# # Convert the BeautifulSoup object to a JSON string and write to a file
 json_content = json.dumps(html_to_json(soup), indent=4)
 
 with open('./job1.json','w') as file:
